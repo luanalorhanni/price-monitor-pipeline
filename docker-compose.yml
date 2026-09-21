@@ -108,6 +108,26 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
+  dashboard:
+    build:
+      context: .
+      dockerfile: dashboard/Dockerfile
+    container_name: price_monitor_dashboard
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: postgres
+      PYTHONPATH: /app
+    volumes:
+      - ./dashboard:/app/dashboard
+      - ./scraper:/app/scraper
+    ports:
+      - "8050:8050"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always      
+
 volumes:
   postgres_data:
   airflow_db_data:

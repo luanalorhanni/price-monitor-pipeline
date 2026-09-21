@@ -25,7 +25,15 @@ def price_scraper():
             coletados += 1
         return coletados
 
-    coletar_kabum()
+    @task
+    def alertar():
+        from alerts.telegram_bot import verificar_e_alertar
+
+        enviados = verificar_e_alertar()
+        print(f"alertas enviados: {enviados}")
+        return enviados
+
+    coletar_kabum() >> alertar()
 
 
 price_scraper()
