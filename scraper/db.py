@@ -18,15 +18,16 @@ def listar_produtos(store=None):
         with conn.cursor() as cur:
             if store:
                 cur.execute(
-                    "SELECT id, url FROM price_monitor.products "
+                    "SELECT id, url, store FROM price_monitor.products "
                     "WHERE active AND store = %s",
                     (store,),
                 )
             else:
                 cur.execute(
-                    "SELECT id, url FROM price_monitor.products WHERE active"
+                    "SELECT id, url, store FROM price_monitor.products WHERE active"
                 )
             return cur.fetchall()
+        
 
 
 def salvar_preco(product_id, preco, coletado_em):

@@ -4,3 +4,5 @@ plotly==7.1.*
 pandas==3.0.*
 psycopg[binary]==3.3.*
 python-dotenv==1.0.*
+requests==2.32.*
+beautifulsoup4==4.12.*
